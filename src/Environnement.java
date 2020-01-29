@@ -27,7 +27,7 @@ class Environnement {
     }
 
 
-    synchronized Perception percevoir(Agent agent) {
+    synchronized void percevoir(Agent agent) {
         int emplacement = emplacementDesAgents.get(agent);
         Stack<Agent> colonneCourante = colonnes.get(emplacement);
         Integer positionDansColonne = colonneCourante.search(agent);
@@ -44,7 +44,7 @@ class Environnement {
         int place2 = emplacement + 1 == 3 ? 2 : 3;
 
 
-        return new Perception(blocDessousCourant, blocDessus, place1, place2);
+        return ;
     }
 
     synchronized void changerEmplacement(Agent agent, int colonneDestinationId) {

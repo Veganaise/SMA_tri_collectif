@@ -1,6 +1,6 @@
 import static java.lang.Thread.sleep;
 
-class Agent implements Runnable {
+class Agent extends ElementPhysique implements Runnable {
     final int id;
     private final Environnement env;
     private final Interaction interaction;
@@ -17,9 +17,7 @@ class Agent implements Runnable {
     }
 
     private void perception() {
-        Perception perception = env.percevoir(this);
-        perception.setEstLibre(interaction.suisJeLibre(this));
-        this.percep = perception;
+        env.percevoir(this);
     }
 
     private void action() {
