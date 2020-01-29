@@ -1,8 +1,8 @@
 class Interaction {
-    private final boolean[] agentsPousses;
+    private final boolean[] agentsLibres;
 
     Interaction(int nbAgent) {
-        agentsPousses = new boolean[nbAgent];
+        agentsLibres = new boolean[nbAgent];
     }
 
     /**
@@ -10,17 +10,17 @@ class Interaction {
      *
      * @param agent
      */
-    void pousse(Agent agent) {
-        agentsPousses[agent.id] = true;
+    void libre(Agent agent) {
+        agentsLibres[agent.id] = true;
     }
 
     /**
      * @param agent
-     * @return vrai si agent poussé
+     * @return vrai si agent libre
      */
-    boolean suisJePousses(Agent agent) {
-        boolean estPousse = agentsPousses[agent.id];
-        agentsPousses[agent.id] = false;
-        return estPousse;
+    boolean suisJeLibre(Agent agent) {
+        boolean estLibre = agentsLibres[agent.id];
+        agentsLibres[agent.id] = false;
+        return estLibre;
     }
 }
