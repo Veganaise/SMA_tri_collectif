@@ -24,7 +24,10 @@ class Environnement {
 
 
     synchronized void percevoir(Agent agent) {
+        Perception perception = agent.percep;
 
+        // Voisinage
+        perception.cases = grille.getVoisinage(agent.x, agent.y, agent.rayonPerception);
     }
 
 

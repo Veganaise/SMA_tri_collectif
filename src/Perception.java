@@ -1,5 +1,9 @@
+import java.util.ArrayList;
+import java.util.List;
+
 class Perception {
     final Agent agent;
+    public ArrayList cases;
 
     boolean estLibre;
 

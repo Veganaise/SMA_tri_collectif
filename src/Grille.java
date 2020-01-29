@@ -25,6 +25,19 @@ public class Grille {
         }
     }
 
+    public ArrayList getVoisinage(int x, int y, int rayonPerception) {
+        ArrayList<Case> neighbors = new ArrayList<>();
+
+        for (int xx = -rayonPerception; xx <= rayonPerception; xx++) {
+            for (int yy = -rayonPerception; yy <= rayonPerception; yy++) {
+                int xModulo = x + xx % m;
+                int yModulo = y + yy % n;
+                neighbors.add(new Case(xModulo, yModulo));
+            }
+        }
+        return neighbors;
+    }
+
 
 
 

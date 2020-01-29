@@ -4,16 +4,26 @@ class Agent extends ElementPhysique implements Runnable {
     final int id;
     private final Environnement env;
     private final Interaction interaction;
-    private final int rayonPerception;
+    private final int t; // taille de la mémoire de l'agent
 
-    private Perception percep;
+    public int rayonPerception; // rayon de perception de l'agent (= nb de cases sur lesquelles il perçoit)
+
+    // Position de l'agent sur la grille
+    public int x;
+    public int y;
 
 
-    Agent(Environnement env, Interaction interaction, int id, int rayonPerception) {
+    public Perception percep;
+
+
+    Agent(Environnement env, Interaction interaction, int id, int rayonPerception, int t, int x, int y) {
         this.env = env;
         this.interaction = interaction;
         this.id = id;
         this.rayonPerception = rayonPerception;
+        this.t = t;
+        this.x = x;
+        this.y = y;
     }
 
     private void perception() {
