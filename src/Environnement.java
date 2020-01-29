@@ -27,7 +27,7 @@ class Environnement {
     }
 
 
-    Perception percevoir(Agent agent) {
+    synchronized Perception percevoir(Agent agent) {
         int emplacement = emplacementDesAgents.get(agent);
         Stack<Agent> colonneCourante = colonnes.get(emplacement);
         Integer positionDansColonne = colonneCourante.search(agent);
@@ -47,7 +47,7 @@ class Environnement {
         return new Perception(blocDessousCourant, blocDessus, place1, place2);
     }
 
-    void changerEmplacement(Agent agent, int colonneDestinationId) {
+    synchronized void changerEmplacement(Agent agent, int colonneDestinationId) {
         int emplacement = emplacementDesAgents.get(agent);
         Stack<Agent> colonneCourante = colonnes.get(emplacement);
         Agent agentDessusDePile = colonneCourante.pop();
@@ -66,7 +66,7 @@ class Environnement {
         printEnvironnement();
     }
 
-    private void printEnvironnement() {
+    synchronized private void printEnvironnement() {
         System.out.println("*********************");
         for (int i = 0; i < colonnes.size(); ++i) {
             Stack<Agent> colonne = colonnes.get(i);
