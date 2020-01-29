@@ -4,28 +4,26 @@ class Agent implements Runnable {
     final int id;
     private final Environnement env;
     private final Interaction interaction;
-    private final Integer blocDessousButId; //id of agent or null if none
+    private final int rayonPerception;
 
     private Perception percep;
 
 
-    Agent(Environnement env, Interaction interaction, int id, Integer blocDessousButId) {
+    Agent(Environnement env, Interaction interaction, int id, int rayonPerception) {
         this.env = env;
         this.interaction = interaction;
         this.id = id;
-        this.blocDessousButId = blocDessousButId;
+        this.rayonPerception = rayonPerception;
     }
 
     private void perception() {
         Perception perception = env.percevoir(this);
-        perception.setEstPousse(interaction.suisJePousses(this));
+        perception.setEstLibre(interaction.suisJeLibre(this));
         this.percep = perception;
     }
 
     private void action() {
-        // le bloc qui est censé ètre en dessous de tous les autres est toujours consiferé bien placé
-        // les autres blocs sont bien placés si le bloc perçu en dessous d'eux est blocDessousBut
-        boolean estBienPlace = blocDessousButId == null ||
+        /*boolean estBienPlace = blocDessousButId == null ||
                 (percep.blocDessousCourant != null && (percep.blocDessousCourant.id == blocDessousButId));
 
         if (percep.estPousse || !estBienPlace) { //si il est poussé ou mal placé
@@ -37,7 +35,7 @@ class Agent implements Runnable {
                 //propage poussée au bloc du dessus
                 interaction.pousse(percep.blocDessus);
             }
-        }
+        }*/
     }
 
 
