@@ -3,7 +3,6 @@ import static java.lang.Thread.sleep;
 class Agent extends ElementPhysique implements Runnable {
     final int id;
     private final Environnement env;
-    private final Interaction interaction;
     private final int t; // taille de la mémoire de l'agent
 
     public int rayonPerception; // rayon de perception de l'agent (= nb de cases sur lesquelles il perçoit)
@@ -16,9 +15,8 @@ class Agent extends ElementPhysique implements Runnable {
     public Perception percep;
 
 
-    Agent(Environnement env, Interaction interaction, int id, int rayonPerception, int t, int x, int y) {
+    Agent(Environnement env,  int id, int rayonPerception, int t, int x, int y) {
         this.env = env;
-        this.interaction = interaction;
         this.id = id;
         this.rayonPerception = rayonPerception;
         this.t = t;
@@ -31,6 +29,9 @@ class Agent extends ElementPhysique implements Runnable {
     }
 
     private void action() {
+        //TODO: toujours déplacement
+        //TODO: puis choix de pose/dépose d'objet
+
         /*boolean estBienPlace = blocDessousButId == null ||
                 (percep.blocDessousCourant != null && (percep.blocDessousCourant.id == blocDessousButId));
 

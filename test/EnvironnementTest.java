@@ -27,4 +27,8 @@ class EnvironnementTest {
         assertEquals(colonne.search(0), 5);
         assertEquals(colonne.search(4), 1);
     }
+
+    @Test
+    void initializePositionOfElements() {
+    }
 }
