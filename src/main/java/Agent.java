@@ -24,6 +24,14 @@ class Agent extends ElementPhysique implements Runnable {
         this.y = y;
     }
 
+    Agent(Environnement env,  int id, int rayonPerception, int t) {
+        this.env = env;
+        this.id = id;
+        this.rayonPerception = rayonPerception;
+        this.t = t;
+    }
+
+
     private void perception() {
         env.percevoir(this);
     }
@@ -48,7 +56,6 @@ class Agent extends ElementPhysique implements Runnable {
     }
 
 
-    @Override
     public void run() {
         int i = 0;
         while (i < 500) {
@@ -62,6 +69,10 @@ class Agent extends ElementPhysique implements Runnable {
                 e.printStackTrace();
             }
         }
+    }
+
+    public String getRepresentation(){
+        return "Δ";
     }
 
 }

@@ -5,7 +5,7 @@ public class Grille {
     private int n,m;
 
     public ArrayList<Case> getCases() {
-        ArrayList<Case> cases = new ArrayList<>(m*n);
+        ArrayList<Case> cases = new ArrayList<Case>(m*n);
         for(int x=0;x<m;++x){
             cases.addAll(Arrays.asList(this.cases[x]).subList(0, n));
         }
@@ -26,7 +26,7 @@ public class Grille {
     }
 
     public ArrayList getVoisinage(int x, int y, int rayonPerception) {
-        ArrayList<Case> neighbors = new ArrayList<>();
+        ArrayList<Case> neighbors = new ArrayList<Case>();
 
         for (int xx = -rayonPerception; xx <= rayonPerception; xx++) {
             for (int yy = -rayonPerception; yy <= rayonPerception; yy++) {
@@ -39,6 +39,24 @@ public class Grille {
     }
 
 
+    public void print(){
+
+        System.out.println("grille:");
+        for(int x=0;x<m;++x){
+            for(int y=0;y<n;++y){
+                ElementPhysique elmt = cases[x][y].elementSurCase;
+                if (elmt == null) {
+                    System.out.print(". ");
+                } else {
+                    System.out.print(elmt.getRepresentation() + " ");
+                }
+                System.out.print(" ");
+            }
+            System.out.println();
+        }
+
+        System.out.println();
+    }
 
 
 }

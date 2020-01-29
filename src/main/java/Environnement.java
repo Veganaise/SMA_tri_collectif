@@ -49,18 +49,8 @@ class Environnement {
 
 
 
-    synchronized private void printEnvironnement() {
-//        System.out.println("*********************");
-//        for (int i = 0; i < colonnes.size(); ++i) {
-//            Stack<Agent> colonne = colonnes.get(i);
-//            System.out.print("colonne " + (i + 1) + ": {");
-//            for (Agent agentAtJ : colonne) {
-//                System.out.print(agentAtJ.id + " ");
-//            }
-//            System.out.print("}\n");
-//        }
-//        System.out.println();
-//        System.out.println();
+    synchronized public void print() {
+        grille.print();
     }
 
 }
