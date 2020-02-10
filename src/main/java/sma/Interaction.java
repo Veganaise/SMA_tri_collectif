@@ -1,3 +1,7 @@
+package sma;
+
+import sma.agents.Agent;
+
 class Interaction {
     private final boolean[] agentsLibres;
 

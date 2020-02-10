@@ -1,5 +1,9 @@
+package sma;
+
+import sma.agents.Agent;
+import sma.environnement.Environnement;
+
 import java.util.ArrayList;
-import java.util.Collections;
 
 class Systeme {
     private final ArrayList<Agent> agents;
@@ -15,7 +19,7 @@ class Systeme {
         agents = new ArrayList<Agent>(nbAgents);
 
 
-        // instanciation des agents
+        // instanciation des sma.agents
         for (int i = 0; i < nbAgents; ++i) {
             agents.add(new Agent(env,i,rayonPerc,t));
         }

@@ -1,7 +1,10 @@
-import java.util.ArrayList;
-import java.util.List;
+package sma;
 
-class Perception {
+import sma.agents.Agent;
+
+import java.util.ArrayList;
+
+public class Perception {
     final Agent agent;
     public ArrayList cases;
 

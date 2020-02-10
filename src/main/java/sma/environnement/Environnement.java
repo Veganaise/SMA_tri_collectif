@@ -3,6 +3,7 @@ import java.util.*;
 
 class Environnement {
     private Grille grille;
+    private HashMap<Integer,>
 
     public Environnement(int m, int n) {
         this.grille=new Grille(n,m);

@@ -1,3 +1,5 @@
+package sma;
+
 public class ObjetATrier extends ElementPhysique {
     public char id;
 
