@@ -1,30 +1,33 @@
+package sma.agents;
+
+import sma.ElementPhysique;
+import sma.Perception;
+import sma.environnement.Environnement;
+
 import static java.lang.Thread.sleep;
 
-class Agent extends ElementPhysique implements Runnable {
-    final int id;
+public class Agent extends ElementPhysique implements Runnable {
+    public final int id;
     private final Environnement env;
-    private final int t; // taille de la mémoire de l'agent
+    public final int t; // taille de la mémoire de l'agent
 
     public int rayonPerception; // rayon de perception de l'agent (= nb de cases sur lesquelles il perçoit)
 
-    // Position de l'agent sur la grille
-    public int x;
-    public int y;
 
 
     public Perception percep;
 
 
-    Agent(Environnement env,  int id, int rayonPerception, int t, int x, int y) {
-        this.env = env;
-        this.id = id;
-        this.rayonPerception = rayonPerception;
-        this.t = t;
-        this.x = x;
-        this.y = y;
-    }
+//    Agent(Environnement env,  int id, int rayonPerception, int t, int x, int y) {
+//        this.env = env;
+//        this.id = id;
+//        this.rayonPerception = rayonPerception;
+//        this.t = t;
+//        this.x = x;
+//        this.y = y;
+//    }
 
-    Agent(Environnement env,  int id, int rayonPerception, int t) {
+    public Agent(Environnement env, int id, int rayonPerception, int t) {
         this.env = env;
         this.id = id;
         this.rayonPerception = rayonPerception;

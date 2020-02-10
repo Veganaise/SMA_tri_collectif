@@ -1,3 +1,7 @@
+package sma.environnement;
+
+import sma.ElementPhysique;
+
 public class Case {
     public Integer x,y;
 

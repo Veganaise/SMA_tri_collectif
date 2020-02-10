@@ -1,3 +1,7 @@
+package sma.environnement;
+
+import sma.ElementPhysique;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
