@@ -42,6 +42,10 @@ public class Grille {
         return neighbors;
     }
 
+    public Case getCase(int x, int y){
+        return cases[x][y];
+    }
+
 
     public void print(){
 

@@ -1,20 +1,19 @@
 package sma;
 
 import sma.agents.Agent;
+import sma.environnement.Case;
 
 import java.util.ArrayList;
 
 public class Perception {
     final Agent agent;
-    public ArrayList cases;
+    public ArrayList<Case> casesVoisinage;
 
-    boolean estLibre;
+    public ObjetATrier objetSurAgent;
 
     public Perception(Agent agent) {
         this.agent = agent;
     }
 
-    public void setEstLibre(boolean estLibre) {
-        this.estLibre = estLibre;
-    }
+    public boolean porteUnObjet(){return objetSurAgent!=null;}
 }

@@ -17,7 +17,7 @@ public class Environnement {
 
 
     /**
-     *  place les sma.agents et instancie les objets à trier, chacun sur des cases differentes.
+     *  place les sma.agents et instancie les objets à trier, chacun sur des casesVoisinage differentes.
      * @param agents sma.agents à placer
      * @param nA nombre d'objet A
      * @param nB nombre d'objet B
@@ -25,7 +25,7 @@ public class Environnement {
     public void initializePositionOfElements(List<Agent> agents, int nA, int nB) {
         ArrayList<Case> casesDisponibles=grille.getCases();
         Random random=new Random();
-        //TODO: changez gestion cases disponibles
+        //TODO: changez gestion casesVoisinage disponibles
         for(Agent agent:agents){
             Case rdmCase=casesDisponibles.get(random.nextInt(casesDisponibles.size()));
             rdmCase.agentSurCase =agent;
@@ -55,7 +55,7 @@ public class Environnement {
 
 
         // Voisinage
-        perception.cases = grille.getVoisinage(position.x, position.y, agent.rayonPerception);
+        perception.casesVoisinage = grille.getVoisinage(position.x, position.y, agent.rayonPerception);
     }
 
 
@@ -65,4 +65,32 @@ public class Environnement {
         grille.print();
     }
 
+    public void deplacement(Agent agent, int distanceDeDeplacement, Integer direction) {
+        Case currentCase=positionDesAgents.get(agent.id);
+        Integer x_objectif=currentCase.x;
+        Integer y_objectif=currentCase.y;
+        switch (direction){
+            case 0:
+                x_objectif+=distanceDeDeplacement;
+                break;
+            case 1:
+                x_objectif-=distanceDeDeplacement;
+                break;
+            case 2:
+                y_objectif+=distanceDeDeplacement;
+                break;
+            case 3:
+                y_objectif-=distanceDeDeplacement;
+                break;
+        }
+
+        Case caseObjectif=grille.getCase(x_objectif,y_objectif);
+        // we move the agent only if the case is not occupied
+        if(!caseObjectif.isOccupied()) {
+            currentCase.agentSurCase=null;
+            caseObjectif.agentSurCase=agent;
+            positionDesAgents.put(agent.id,caseObjectif);
+        }
+
+    }
 }

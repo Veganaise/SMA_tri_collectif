@@ -13,7 +13,7 @@ public class Agent extends ElementPhysique implements Runnable {
     private final Environnement env;
     public final int t; // taille de la mémoire de l'agent
 
-    public int rayonPerception; // rayon de perception de l'agent (= nb de cases sur lesquelles il perçoit)
+    public int rayonPerception; // rayon de perception de l'agent (= nb de casesVoisinage sur lesquelles il perçoit)
 
     int distanceDeDeplacement=1;
 
@@ -32,15 +32,20 @@ public class Agent extends ElementPhysique implements Runnable {
     }
 
     private void action() {
-        //TODO: toujours déplacement
         //TODO: puis choix de pose/dépose d'objet
 
         // selection aléatoire d'un deplacement
         Random rdm = new Random();
-        Integer deplacement = rdm.nextInt(4);
+        Integer direction = rdm.nextInt(4);
 
-//        env.deplacementAleatoire(this, distanceDeDeplacement);
+        env.deplacement(this, distanceDeDeplacement, direction);
 
+        // prise/dépot d'objet
+        if(percep.porteUnObjet() && ){
+            //dépose possible d'objet
+        }else{
+
+        }
 
         /*boolean estBienPlace = blocDessousButId == null ||
                 (percep.blocDessousCourant != null && (percep.blocDessousCourant.id == blocDessousButId));
