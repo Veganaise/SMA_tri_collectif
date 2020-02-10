@@ -31,14 +31,12 @@ public class Grille {
         }
     }
 
-    public ArrayList<Case> getVoisinage(int x, int y, int rayonPerception) {
+    public ArrayList<Case> getVoisinage(int xAgent, int yAgent, int rayonPerception) {
         ArrayList<Case> neighbors = new ArrayList<Case>();
 
-        for (int xx = -rayonPerception; xx <= rayonPerception; xx++) {
-            for (int yy = -rayonPerception; yy <= rayonPerception; yy++) {
-                int xModulo = x + xx % m;
-                int yModulo = y + yy % n;
-                neighbors.add(new Case(xModulo, yModulo));
+        for (int x = xAgent-rayonPerception; x <= xAgent+rayonPerception; x++) {
+            for (int y = yAgent-rayonPerception; y <= yAgent+rayonPerception; y++) {
+                neighbors.add(getCase(x,y));
             }
         }
         return neighbors;
@@ -51,8 +49,11 @@ public class Grille {
      * @return Case
      */
     public Case getCase(int x, int y){
-        x=x<=0? m-x:x;
-        y=y<=0? n-y:x;
+
+        x=x<=0? m+x:x;
+        y=y<=0? n+y:y;
+
+
         return cases[(x-1)%m][(y-1)%n];
     }
 
