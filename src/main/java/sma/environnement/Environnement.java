@@ -25,21 +25,22 @@ public class Environnement {
     public void initializePositionOfElements(List<Agent> agents, int nA, int nB) {
         ArrayList<Case> casesDisponibles=grille.getCases();
         Random random=new Random();
+        //TODO: changez gestion cases disponibles
         for(Agent agent:agents){
             Case rdmCase=casesDisponibles.get(random.nextInt(casesDisponibles.size()));
-            rdmCase.elementSurCase=agent;
+            rdmCase.agentSurCase =agent;
             positionDesAgents.put(agent.id,rdmCase);
             casesDisponibles.remove(rdmCase);
         }
 
         for(int i=0;i<nA;++i){
             Case rdmCase=casesDisponibles.get(random.nextInt(casesDisponibles.size()));
-            rdmCase.elementSurCase=new ObjetATrier('A');
+            rdmCase.objetSurCase =new ObjetATrier('A');
             casesDisponibles.remove(rdmCase);
         }
         for(int i=0;i<nB;++i){
             Case rdmCase=casesDisponibles.get(random.nextInt(casesDisponibles.size()));
-            rdmCase.elementSurCase=new ObjetATrier('B');
+            rdmCase.objetSurCase =new ObjetATrier('B');
             casesDisponibles.remove(rdmCase);
         }
 
@@ -49,13 +50,14 @@ public class Environnement {
     synchronized public void percevoir(Agent agent) {
         Perception perception = agent.percep;
         Case position=positionDesAgents.get(agent.id);
-        assert(position.elementSurCase.getClass()==Agent.class
-                && position.elementSurCase==agent);
+        assert(position.agentSurCase.getClass()==Agent.class
+                && position.agentSurCase ==agent);
 
 
         // Voisinage
         perception.cases = grille.getVoisinage(position.x, position.y, agent.rayonPerception);
     }
+
 
 
 

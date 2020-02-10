@@ -45,10 +45,11 @@ public class Grille {
 
     public void print(){
 
+        //TODO: gestion des agents
         System.out.println("grille:");
         for(int x=0;x<m;++x){
             for(int y=0;y<n;++y){
-                ElementPhysique elmt = cases[x][y].elementSurCase;
+                ElementPhysique elmt = cases[x][y].objetSurCase;
                 if (elmt == null) {
                     System.out.print(". ");
                 } else {

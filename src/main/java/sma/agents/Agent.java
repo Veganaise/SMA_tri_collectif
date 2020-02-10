@@ -4,6 +4,8 @@ import sma.ElementPhysique;
 import sma.Perception;
 import sma.environnement.Environnement;
 
+import java.util.Random;
+
 import static java.lang.Thread.sleep;
 
 public class Agent extends ElementPhysique implements Runnable {
@@ -13,19 +15,9 @@ public class Agent extends ElementPhysique implements Runnable {
 
     public int rayonPerception; // rayon de perception de l'agent (= nb de cases sur lesquelles il perçoit)
 
-
+    int distanceDeDeplacement=1;
 
     public Perception percep;
-
-
-//    Agent(Environnement env,  int id, int rayonPerception, int t, int x, int y) {
-//        this.env = env;
-//        this.id = id;
-//        this.rayonPerception = rayonPerception;
-//        this.t = t;
-//        this.x = x;
-//        this.y = y;
-//    }
 
     public Agent(Environnement env, int id, int rayonPerception, int t) {
         this.env = env;
@@ -43,6 +35,13 @@ public class Agent extends ElementPhysique implements Runnable {
         //TODO: toujours déplacement
         //TODO: puis choix de pose/dépose d'objet
 
+        // selection aléatoire d'un deplacement
+        Random rdm = new Random();
+        Integer deplacement = rdm.nextInt(4);
+
+//        env.deplacementAleatoire(this, distanceDeDeplacement);
+
+
         /*boolean estBienPlace = blocDessousButId == null ||
                 (percep.blocDessousCourant != null && (percep.blocDessousCourant.id == blocDessousButId));
 
@@ -57,6 +56,7 @@ public class Agent extends ElementPhysique implements Runnable {
             }
         }*/
     }
+
 
 
     public void run() {

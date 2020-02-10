@@ -5,7 +5,7 @@ import sma.environnement.Environnement;
 
 import java.util.ArrayList;
 
-class Systeme {
+public class Systeme {
     private final ArrayList<Agent> agents;
     private final Environnement env;
 
@@ -14,7 +14,7 @@ class Systeme {
     int rayonPerc=2;
     int t=10;
 
-    Systeme(int nbAgents, int nA , int nB) {
+    public Systeme(int nbAgents, int nA, int nB) {
         env = new Environnement(6,6);
         agents = new ArrayList<Agent>(nbAgents);
 
@@ -34,7 +34,7 @@ class Systeme {
         }
     }
 
-    void print(){
+    public void print(){
         env.print();
     }
 }
