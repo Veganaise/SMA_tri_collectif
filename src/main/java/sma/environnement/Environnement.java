@@ -65,6 +65,7 @@ public class Environnement {
         grille.print();
     }
 
+    private String[] directionsStrings={"","","",""};
     public void deplacement(Agent agent, int distanceDeDeplacement, Integer direction) {
         Case currentCase=positionDesAgents.get(agent.id);
         Integer x_objectif=currentCase.x;
@@ -90,6 +91,10 @@ public class Environnement {
             currentCase.agentSurCase=null;
             caseObjectif.agentSurCase=agent;
             positionDesAgents.put(agent.id,caseObjectif);
+
+            System.out.println("agent "+agent.id+" se déplace en "+caseObjectif.toString());
+        }else{
+            System.out.println("agent "+agent.id+" a essayé de se déplacer en  "+caseObjectif.toString());
         }
 
     }

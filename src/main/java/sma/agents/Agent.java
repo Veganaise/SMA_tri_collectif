@@ -24,6 +24,7 @@ public class Agent extends ElementPhysique implements Runnable {
         this.id = id;
         this.rayonPerception = rayonPerception;
         this.t = t;
+        this.percep=new Perception(this);
     }
 
 
@@ -40,26 +41,13 @@ public class Agent extends ElementPhysique implements Runnable {
 
         env.deplacement(this, distanceDeDeplacement, direction);
 
+
         // prise/dépot d'objet
-        if(percep.porteUnObjet() && ){
+        if(percep.porteUnObjet()){
             //dépose possible d'objet
         }else{
 
         }
-
-        /*boolean estBienPlace = blocDessousButId == null ||
-                (percep.blocDessousCourant != null && (percep.blocDessousCourant.id == blocDessousButId));
-
-        if (percep.estPousse || !estBienPlace) { //si il est poussé ou mal placé
-            if (percep.blocDessus == null) {//au dessus de la pile (donc il peut bouger )
-                // déplacement aléatoire
-                boolean choisitPlace1 = Math.random() < 0.5;
-                env.changerEmplacement(this, choisitPlace1 ? percep.place1 : percep.place2);
-            } else {
-                //propage poussée au bloc du dessus
-                interaction.pousse(percep.blocDessus);
-            }
-        }*/
     }
 
 
@@ -79,8 +67,13 @@ public class Agent extends ElementPhysique implements Runnable {
         }
     }
 
+    public void iteration(){
+        perception();
+        action();
+    }
+
     public String getRepresentation(){
-        return "Δ";
+        return String.valueOf(id);
     }
 
 }

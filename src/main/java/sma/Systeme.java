@@ -14,8 +14,10 @@ public class Systeme {
     int rayonPerc=2;
     int t=10;
 
-    public Systeme(int nbAgents, int nA, int nB) {
-        env = new Environnement(6,6);
+    Integer maxIterations=100;
+
+    public Systeme(int nbAgents, int nA, int nB,int m,int n) {
+        env = new Environnement(m,n);
         agents = new ArrayList<Agent>(nbAgents);
 
 
@@ -26,12 +28,27 @@ public class Systeme {
         env.initializePositionOfElements(agents,nA,nB);
     }
 
-    void startSystem() {
-        for (Agent agent :
-                agents) {
-            Thread t = new Thread(agent);
-            t.start();
+    public Systeme(int nbAgents, int nA, int nB){
+        this(nbAgents,nA,nB,6,6);
+    }
+
+    public void startSystem() {
+//        for (Agent agent :
+//                agents) {
+//            Thread t = new Thread(agent);
+//            t.start();
+//        }
+
+        int token=0;
+        for(int i=1;i<=maxIterations;++i){
+            System.out.println("iteration "+i);
+            agents.get(token).iteration();
+            token=(token + 1)%agents.size();
+
+
+            print();
         }
+
     }
 
     public void print(){

@@ -1,6 +1,8 @@
 package sma.environnement;
 
 import sma.ElementPhysique;
+import sma.ObjetATrier;
+import sma.agents.Agent;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -29,7 +31,7 @@ public class Grille {
         }
     }
 
-    public ArrayList getVoisinage(int x, int y, int rayonPerception) {
+    public ArrayList<Case> getVoisinage(int x, int y, int rayonPerception) {
         ArrayList<Case> neighbors = new ArrayList<Case>();
 
         for (int xx = -rayonPerception; xx <= rayonPerception; xx++) {
@@ -42,27 +44,48 @@ public class Grille {
         return neighbors;
     }
 
+    /**
+     * return Case at specified position (with management of overflow)
+     * @param x
+     * @param y
+     * @return Case
+     */
     public Case getCase(int x, int y){
-        return cases[x][y];
+        x=x<=0? m-x:x;
+        y=y<=0? n-y:x;
+        return cases[(x-1)%m][(y-1)%n];
     }
 
 
     public void print(){
+        StringBuilder objetsString=new StringBuilder();
+        StringBuilder agentString=new StringBuilder();
 
         //TODO: gestion des agents
-        System.out.println("grille:");
+        objetsString.append("Objets:\n");
+        agentString.append("Agents: \n");
         for(int x=0;x<m;++x){
             for(int y=0;y<n;++y){
-                ElementPhysique elmt = cases[x][y].objetSurCase;
+                ObjetATrier elmt = cases[x][y].objetSurCase;
                 if (elmt == null) {
-                    System.out.print(". ");
+                    objetsString.append("_");
                 } else {
-                    System.out.print(elmt.getRepresentation() + " ");
+                    objetsString.append(elmt.getRepresentation());
                 }
-                System.out.print(" ");
+
+
+                Agent agent=cases[x][y].agentSurCase;
+                if(agent==null){
+                    objetsString.append("_");
+                }else{
+                    objetsString.append(agent.getRepresentation());
+                }
+
+                objetsString.append(" ");
             }
-            System.out.println();
+            objetsString.append("\n");
         }
+        System.out.println(objetsString.toString());
 
         System.out.println();
     }
