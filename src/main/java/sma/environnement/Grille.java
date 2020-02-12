@@ -43,12 +43,16 @@ public class Grille {
     }
 
     /**
-     * return Case at specified position (with management of overflow)
+     * return Case at specified position (with management of overflow).
      * @param x
      * @param y
      * @return Case
      */
     public Case getCase(int x, int y){
+        if(x<(-m) || y<(-n)) {
+            System.out.println("erreur dans getCase de Grille. argument trop négatif");
+            return null;
+        }
 
         x=x<=0? m+x:x;
         y=y<=0? n+y:y;
