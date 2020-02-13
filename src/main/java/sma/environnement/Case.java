@@ -15,8 +15,12 @@ public class Case {
         this.y = y;
     }
 
-    public boolean isOccupied(){
+    public boolean isOccupiedByAgent(){
         return agentSurCase!=null;
+    }
+
+    public boolean isOccupiedByObject(){
+        return objetSurCase!=null;
     }
 
     public char getTypeObjet(){

@@ -53,6 +53,7 @@ public class Environnement {
         assert(position.agentSurCase.getClass()==Agent.class
                 && position.agentSurCase ==agent);
 
+        perception.caseActuelle=position;
 
         // Voisinage
         perception.casesVoisinage = grille.getVoisinage(position.x, position.y, agent.rayonPerception);
@@ -87,7 +88,7 @@ public class Environnement {
 
         Case caseObjectif=grille.getCase(x_objectif,y_objectif);
         // we move the agent only if the case is not occupied
-        if(!caseObjectif.isOccupied()) {
+        if(!caseObjectif.isOccupiedByAgent()) {
             currentCase.agentSurCase=null;
             caseObjectif.agentSurCase=agent;
             positionDesAgents.put(agent.id,caseObjectif);
@@ -97,5 +98,16 @@ public class Environnement {
             System.out.println("agent "+agent.id+" a essayé de se déplacer en  "+caseObjectif.toString());
         }
 
+    }
+
+    public void deposeObjet( Case caseDeDepose, ObjetATrier objetSurAgent)  {
+        if(caseDeDepose.isOccupiedByObject()){
+            new Exception("Dépose sur case déjà occupée").printStackTrace();
+        }
+        caseDeDepose.objetSurCase=objetSurAgent;
+    }
+
+    public void priseObjet(Case caseActuelle) {
+        caseActuelle.objetSurCase=null;
     }
 }

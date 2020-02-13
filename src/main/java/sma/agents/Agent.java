@@ -1,7 +1,9 @@
 package sma.agents;
 
 import sma.ElementPhysique;
+import sma.ObjetATrier;
 import sma.Perception;
+import sma.environnement.Case;
 import sma.environnement.Environnement;
 
 import java.util.Random;
@@ -16,6 +18,8 @@ public class Agent extends ElementPhysique implements Runnable {
     public int rayonPerception; // rayon de perception de l'agent (= nb de casesVoisinage sur lesquelles il perçoit)
 
     int distanceDeDeplacement=1;
+    double k_prise=0.1;
+    double k_depose=0.1;
 
     public Perception percep;
 
@@ -33,7 +37,8 @@ public class Agent extends ElementPhysique implements Runnable {
     }
 
     private void action() {
-        //TODO: puis choix de pose/dépose d'objet
+
+        perception();
 
         // selection aléatoire d'un deplacement
         Random rdm = new Random();
@@ -42,11 +47,29 @@ public class Agent extends ElementPhysique implements Runnable {
         env.deplacement(this, distanceDeDeplacement, direction);
 
 
-        // prise/dépot d'objet
-        if(percep.porteUnObjet()){
-            //dépose possible d'objet
-        }else{
+        perception();
 
+        // dépot d'objet
+        Case caseActuelle = percep.caseActuelle;
+        if(percep.porteUnObjet() && !caseActuelle.isOccupiedByObject()){
+            ObjetATrier objetSurAgent = percep.objetSurAgent;
+            double f = percep.getProportionDeObjet(objetSurAgent.getType());
+            double proba=(f/(k_depose+f))*(f/(k_depose+f));
+            if(rdm.nextDouble()<proba){
+                System.out.println("agent "+id+" dépose objet "+objetSurAgent.type);
+                percep.objetSurAgent=null;
+                env.deposeObjet(caseActuelle,objetSurAgent);
+            }
+
+        }else if(!percep.porteUnObjet() && caseActuelle.isOccupiedByObject()){//prise d'objet
+            ObjetATrier objetSurCase = caseActuelle.objetSurCase;
+            double f=percep.getProportionDeObjet(objetSurCase.type);
+            double proba=(k_prise/((k_prise+f)))*(k_prise/(k_prise+f));
+            if(rdm.nextDouble()<proba){
+                System.out.println("agent "+id+" prend objet "+objetSurCase.getRepresentation());
+                percep.objetSurAgent=objetSurCase;
+                env.priseObjet(caseActuelle);
+            }
         }
     }
 
@@ -68,7 +91,6 @@ public class Agent extends ElementPhysique implements Runnable {
     }
 
     public void iteration(){
-        perception();
         action();
     }
 

@@ -11,10 +11,10 @@ public class Systeme {
 
     int nA=3;
     int nB=3;
-    int rayonPerc=2;
+    int rayonPerc=1;
     int t=10;
 
-    Integer maxIterations=100;
+    Integer maxIterations=1000;
 
     public Systeme(int nbAgents, int nA, int nB,int m,int n) {
         env = new Environnement(m,n);
