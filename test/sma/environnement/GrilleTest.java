@@ -1,6 +1,7 @@
 package sma.environnement;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -25,6 +26,7 @@ class GrilleTest {
     }
 
     @Test
+    @DisplayName("Je suis ton ami :)")
     void getCase() {
         Case caseBase=grille.getCase(1,1);
         assertEquals(caseBase.x,1);
