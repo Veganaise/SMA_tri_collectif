@@ -6,6 +6,7 @@ import sma.Perception;
 import sma.environnement.Case;
 import sma.environnement.Environnement;
 
+import java.util.ArrayList;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
@@ -20,6 +21,7 @@ public class Agent extends ElementPhysique implements Runnable {
     int distanceDeDeplacement=1;
     double k_prise=0.1;
     double k_depose=0.1;
+    ArrayList<Character> memoire = new ArrayList<>();
 
     public Perception percep;
 
@@ -51,14 +53,24 @@ public class Agent extends ElementPhysique implements Runnable {
 
         // dépot d'objet
         Case caseActuelle = percep.caseActuelle;
+        if(this.memoire.size() < this.t) {
+            this.memoire.add(caseActuelle.getTypeObjet());
+        } else {
+            this.memoire.remove(0);
+            this.memoire.add(caseActuelle.getTypeObjet());
+        }
+        System.out.println("Mémoire " + this.memoire);
+
         if(percep.porteUnObjet() && !caseActuelle.isOccupiedByObject()){
             ObjetATrier objetSurAgent = percep.objetSurAgent;
             double f = percep.getProportionDeObjet(objetSurAgent.getType());
             double proba=(f/(k_depose+f))*(f/(k_depose+f));
             if(rdm.nextDouble()<proba){
-                System.out.println("agent "+id+" dépose objet "+objetSurAgent.type);
+                System.out.println("agent "+id+" dépose objet "+objetSurAgent.getRepresentation());
                 percep.objetSurAgent=null;
                 env.deposeObjet(caseActuelle,objetSurAgent);
+            } else {
+                System.out.println("agent "+id+" porte toujours objet "+objetSurAgent.getRepresentation());
             }
 
         }else if(!percep.porteUnObjet() && caseActuelle.isOccupiedByObject()){//prise d'objet

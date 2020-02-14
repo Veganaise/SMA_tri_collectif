@@ -93,9 +93,9 @@ public class Environnement {
             caseObjectif.agentSurCase=agent;
             positionDesAgents.put(agent.id,caseObjectif);
 
-            System.out.println("agent "+agent.id+" se déplace en "+caseObjectif.toString());
+            System.out.println("agent "+agent.id+" se déplace en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
         }else{
-            System.out.println("agent "+agent.id+" a essayé de se déplacer en  "+caseObjectif.toString());
+            System.out.println("agent "+agent.id+" a essayé de se déplacer en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
         }
 
     }
