@@ -32,13 +32,18 @@ public class Grille {
     }
 
     public ArrayList<Case> getVoisinage(int xAgent, int yAgent, int rayonPerception) {
-        ArrayList<Case> neighbors = new ArrayList<Case>();
+        ArrayList<Case> neighbors = new ArrayList<>();
 
         for (int x = xAgent-rayonPerception; x <= xAgent+rayonPerception; x++) {
-            for (int y = yAgent-rayonPerception; y <= yAgent+rayonPerception; y++) {
-                neighbors.add(getCase(x,y));
+            neighbors.add(getCase(x, yAgent));
+        }
+
+        for (int y = yAgent-rayonPerception; y <= yAgent+rayonPerception; y++) {
+            if(!neighbors.contains(getCase(xAgent, y))) {
+                neighbors.add(getCase(xAgent, y));
             }
         }
+
         return neighbors;
     }
 
