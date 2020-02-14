@@ -11,9 +11,22 @@ public class Perception {
 
     public ObjetATrier objetSurAgent;
 
+    public Case caseActuelle;
+
     public Perception(Agent agent) {
         this.agent = agent;
     }
 
     public boolean porteUnObjet(){return objetSurAgent!=null;}
+
+    public double getProportionDeObjet(int type){
+        int compteur=0;
+        for (Case c :
+        casesVoisinage){
+            if(c.getTypeObjet()==type){
+                compteur++;
+            }
+        }
+        return (double)compteur/casesVoisinage.size();
+    }
 }
