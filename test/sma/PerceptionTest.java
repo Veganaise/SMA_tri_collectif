@@ -32,10 +32,9 @@ class PerceptionTest {
 
     @Test
     void getProportionDeObjet() {
-        assertEquals(percep.getProportionDeObjet('A'),1.0/3.0);
-        assertEquals(percep.getProportionDeObjet('B'),1.0/3.0);
-        assertEquals(percep.getProportionDeObjet('C'),0.0);
-
+        assertEquals(percep.getProportionDeObjetDepot('A'),1.0/3.0);
+        assertEquals(percep.getProportionDeObjetDepot('B'),1.0/3.0);
+        assertEquals(percep.getProportionDeObjetDepot('C'),0.0);
 
     }
 }

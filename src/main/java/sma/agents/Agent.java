@@ -20,7 +20,7 @@ public class Agent extends ElementPhysique implements Runnable {
 
     int distanceDeDeplacement=1;
     double k_prise=0.1;
-    double k_depose=0.1;
+    double k_depose=0.3;
     ArrayList<Character> memoire = new ArrayList<>();
 
     public Perception percep;
@@ -59,23 +59,21 @@ public class Agent extends ElementPhysique implements Runnable {
             this.memoire.remove(0);
             this.memoire.add(caseActuelle.getTypeObjet());
         }
-        System.out.println("Mémoire " + this.memoire);
+        System.out.println("Mémoire : " + this.memoire);
 
         if(percep.porteUnObjet() && !caseActuelle.isOccupiedByObject()){
             ObjetATrier objetSurAgent = percep.objetSurAgent;
-            double f = percep.getProportionDeObjet(objetSurAgent.getType());
+            double f = percep.getProportionDeObjetDepot(objetSurAgent.getType());
             double proba=(f/(k_depose+f))*(f/(k_depose+f));
             if(rdm.nextDouble()<proba){
                 System.out.println("agent "+id+" dépose objet "+objetSurAgent.getRepresentation());
                 percep.objetSurAgent=null;
                 env.deposeObjet(caseActuelle,objetSurAgent);
-            } else {
-                System.out.println("agent "+id+" porte toujours objet "+objetSurAgent.getRepresentation());
             }
 
-        }else if(!percep.porteUnObjet() && caseActuelle.isOccupiedByObject()){//prise d'objet
+        } else if(!percep.porteUnObjet() && caseActuelle.isOccupiedByObject()){//prise d'objet
             ObjetATrier objetSurCase = caseActuelle.objetSurCase;
-            double f=percep.getProportionDeObjet(objetSurCase.type);
+            double f=percep.getProportionDeObjetPrise(objetSurCase.getType(), this.memoire);
             double proba=(k_prise/((k_prise+f)))*(k_prise/(k_prise+f));
             if(rdm.nextDouble()<proba){
                 System.out.println("agent "+id+" prend objet "+objetSurCase.getRepresentation());

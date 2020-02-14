@@ -19,14 +19,27 @@ public class Perception {
 
     public boolean porteUnObjet(){return objetSurAgent!=null;}
 
-    public double getProportionDeObjet(int type){
+    public double getProportionDeObjetDepot(int type){
         int compteur=0;
-        for (Case c :
-        casesVoisinage){
+        for (Case c : casesVoisinage){
             if(c.getTypeObjet()==type){
                 compteur++;
             }
         }
         return (double)compteur/casesVoisinage.size();
+    }
+
+    public double getProportionDeObjetPrise(int type, ArrayList<Character> memoire) {
+        int compteurType = 0;
+        int compteurNonType = 0;
+        double e = 0.05;
+        for (Character typeObjet : memoire) {
+            if(typeObjet == type) {
+                compteurType++;
+            } else if (typeObjet != 'O') {
+                compteurNonType++;
+            }
+        }
+        return (compteurType+compteurNonType*e)/this.agent.t;
     }
 }
