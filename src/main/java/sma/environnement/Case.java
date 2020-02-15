@@ -10,6 +10,8 @@ public class Case {
 
     public Agent agentSurCase;
 
+
+
     public Case(Integer x, Integer y) {
         this.x = x;
         this.y = y;
@@ -25,7 +27,7 @@ public class Case {
 
     public char getTypeObjet(){
         if(objetSurCase==null){
-            return 'O';
+            return ObjetATrier.NON_EXISTANT;
         }else{
             return objetSurCase.id;
         }

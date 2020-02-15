@@ -33,20 +33,16 @@ public class Systeme {
     }
 
     public void startSystem() {
-//        for (Agent agent :
-//                agents) {
-//            Thread t = new Thread(agent);
-//            t.start();
-//        }
 
         int token=0;
         for(int i=1;i<=maxIterations;++i){
             System.out.println("iteration "+i);
-            agents.get(token).iteration();
-            token=(token + 1)%agents.size();
 
-
-            print();
+            for(Agent agent: agents){
+                agent.iteration();
+                print();
+            }
+//            print();
         }
 
     }

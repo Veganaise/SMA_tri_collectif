@@ -6,22 +6,21 @@ import sma.Perception;
 import sma.environnement.Case;
 import sma.environnement.Environnement;
 
-import java.util.ArrayList;
 import java.util.Random;
 
 import static java.lang.Thread.sleep;
 
-public class Agent extends ElementPhysique implements Runnable {
+public class Agent extends ElementPhysique {
     public final int id;
     private final Environnement env;
-    public final int t; // taille de la mémoire de l'agent
+
 
     public int rayonPerception; // rayon de perception de l'agent (= nb de casesVoisinage sur lesquelles il perçoit)
 
-    int distanceDeDeplacement=1;
+    private int distanceDeDeplacement=1;
     double k_prise=0.1;
     double k_depose=0.3;
-    ArrayList<Character> memoire = new ArrayList<>();
+    private Memoire memoire;
 
     public Perception percep;
 
@@ -29,7 +28,7 @@ public class Agent extends ElementPhysique implements Runnable {
         this.env = env;
         this.id = id;
         this.rayonPerception = rayonPerception;
-        this.t = t;
+        this.memoire=new Memoire(t);
         this.percep=new Perception(this);
     }
 
@@ -50,17 +49,13 @@ public class Agent extends ElementPhysique implements Runnable {
 
 
         perception();
+        Case caseActuelle = percep.caseActuelle;
+
+        // mise à jour mémoire
+        memoire.miseAjour(caseActuelle);
+        System.out.println(memoire.toString());
 
         // dépot d'objet
-        Case caseActuelle = percep.caseActuelle;
-        if(this.memoire.size() < this.t) {
-            this.memoire.add(caseActuelle.getTypeObjet());
-        } else {
-            this.memoire.remove(0);
-            this.memoire.add(caseActuelle.getTypeObjet());
-        }
-        System.out.println("Mémoire : " + this.memoire);
-
         if(percep.porteUnObjet() && !caseActuelle.isOccupiedByObject()){
             ObjetATrier objetSurAgent = percep.objetSurAgent;
             double f = percep.getProportionDeObjetDepot(objetSurAgent.getType());
@@ -73,7 +68,7 @@ public class Agent extends ElementPhysique implements Runnable {
 
         } else if(!percep.porteUnObjet() && caseActuelle.isOccupiedByObject()){//prise d'objet
             ObjetATrier objetSurCase = caseActuelle.objetSurCase;
-            double f=percep.getProportionDeObjetPrise(objetSurCase.getType(), this.memoire);
+            double f=percep.getProportionDeObjetPrise(objetSurCase.getType(), memoire);
             double proba=(k_prise/((k_prise+f)))*(k_prise/(k_prise+f));
             if(rdm.nextDouble()<proba){
                 System.out.println("agent "+id+" prend objet "+objetSurCase.getRepresentation());
@@ -82,24 +77,6 @@ public class Agent extends ElementPhysique implements Runnable {
             }
         }
     }
-
-
-
-    public void run() {
-        int i = 0;
-        while (i < 500) {
-//            System.out.println("yo "+id);
-            perception();
-            action();
-            i++;
-            try {
-                sleep(500);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     public void iteration(){
         action();
     }
