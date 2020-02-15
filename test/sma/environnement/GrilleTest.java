@@ -19,10 +19,16 @@ class GrilleTest {
     @Test
     void getVoisinage() {
         ArrayList<Case> voisinage = grille.getVoisinage(3, 3, 1);
-        for (Case caseAttendue :
-                grille.getCases()) {
-            assert (voisinage.contains(caseAttendue));
-        }
+
+        assert (voisinage.contains(grille.getCase(3,3)));
+        assert (voisinage.contains(grille.getCase(2,3)));
+        assert (voisinage.contains(grille.getCase(4,3)));
+        assert (voisinage.contains(grille.getCase(3,2)));
+        assert (voisinage.contains(grille.getCase(3,4)));
+
+        assert (! voisinage.contains(grille.getCase(4,4)));
+        assert (! voisinage.contains(grille.getCase(1,1)));
+        assert (! voisinage.contains(grille.getCase(2,2)));
     }
 
     @Test
