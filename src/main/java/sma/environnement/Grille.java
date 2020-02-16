@@ -100,5 +100,22 @@ public class Grille {
         System.out.println();
     }
 
+    // stats
+    public double countNumberOfSameTypeObjectAround(Case caseOfObject) throws Exception {
+        ObjetATrier obj=caseOfObject.objetSurCase;
+        if(obj==null){
+            throw new Exception("objet null");
+        }
+        ArrayList<Case> voisinage = getVoisinage(caseOfObject.x, caseOfObject.y, 1);
+        voisinage.remove(caseOfObject);
+        int compteurObjetsMemeType=0;
+        for(Case caseVoisine: voisinage){
+            if(caseVoisine.isOccupiedByObject()&& caseVoisine.objetSurCase.shareSameType(obj)){
+                compteurObjetsMemeType++;
+            }
+        }
+        return compteurObjetsMemeType;
+    }
+
 
 }

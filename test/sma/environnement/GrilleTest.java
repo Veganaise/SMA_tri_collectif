@@ -3,6 +3,7 @@ package sma.environnement;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+import sma.ObjetATrier;
 
 import java.util.ArrayList;
 
@@ -48,4 +49,16 @@ class GrilleTest {
     }
 
 
+    @Test
+    void countNumberOfSameTypeObjectAround() {
+        grille.getCase(2,2).objetSurCase=new ObjetATrier('A');
+        grille.getCase(1,2).objetSurCase=new ObjetATrier('A');
+        grille.getCase(3,2).objetSurCase=new ObjetATrier('B');
+
+        try {
+            assertEquals (1,grille.countNumberOfSameTypeObjectAround(grille.getCase(2,2)));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }

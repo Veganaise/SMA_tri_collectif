@@ -21,4 +21,7 @@ public class ObjetATrier extends ElementPhysique {
         return type;
     }
 
+    public boolean shareSameType(ObjetATrier objet){
+        return this.id==objet.id;
+    }
 }
