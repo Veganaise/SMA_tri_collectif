@@ -1,5 +1,6 @@
 package sma.environnement;
 
+import javafx.util.Pair;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -60,5 +61,28 @@ class GrilleTest {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
+        // tests de mesure de qualité du tri
+
+        Pair<Double, Double> mesure = grille.mesureDeQualiteDuTri();
+        Double ratioIsole=mesure.getKey();
+        Double moyenneObjetsVoisins=mesure.getValue();
+
+        assertEquals(1.0/3.0,ratioIsole);
+        // le calcul de moyenne que j'utilise provoque une légère erreur d'arrondis
+        assert(Math.abs(moyenneObjetsVoisins- 2.0/3) <=0.0001);
+
+
+        grille.getCase(3,1).objetSurCase=new ObjetATrier('B');
+
+        // oui, c'est pas fou comme notation 😐
+        Pair<Double, Double> mesure2 = grille.mesureDeQualiteDuTri();
+        Double ratioIsole2=mesure2.getKey();
+        Double moyenneObjetsVoisins2=mesure2.getValue();
+        assertEquals(0,ratioIsole2);
+        // le calcul de moyenne que j'utilise provoque une légère erreur d'arrondis
+        assert(Math.abs(moyenneObjetsVoisins2- 1) <=0.0001);
+
     }
+
 }

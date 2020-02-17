@@ -1,5 +1,6 @@
 package sma.environnement;
 
+import javafx.util.Pair;
 import sma.ElementPhysique;
 import sma.ObjetATrier;
 import sma.agents.Agent;
@@ -101,7 +102,7 @@ public class Grille {
     }
 
     // stats
-    public double countNumberOfSameTypeObjectAround(Case caseOfObject) throws Exception {
+    public Integer countNumberOfSameTypeObjectAround(Case caseOfObject) throws Exception {
         ObjetATrier obj=caseOfObject.objetSurCase;
         if(obj==null){
             throw new Exception("objet null");
@@ -116,6 +117,37 @@ public class Grille {
         }
         return compteurObjetsMemeType;
     }
+
+    /**
+     * mesure la qualité du tri avec le nombre d'objets isolés et le nombre moyen d'objets de même type dans le voisinage
+     * des objets
+     * @return < ration nombre objet isolé sur nombre total d'objet, nombre moyen d'objets de même type dans le voisinage>
+     */
+    public Pair<Double,Double> mesureDeQualiteDuTri(){
+        int compteurIsole=0;
+        int nbObjets=0;
+        Double nombreMoyenDeObjetsVoisins=0d;
+
+
+        for(Case c: getCases()){
+            if(c.isOccupiedByObject()){
+                try {
+                    nbObjets++;
+                    Integer nombreObjetsVoisins = countNumberOfSameTypeObjectAround(c);
+                    if(nombreObjetsVoisins==0) compteurIsole++;
+                    nombreMoyenDeObjetsVoisins+=(nombreObjetsVoisins-nombreMoyenDeObjetsVoisins)/nbObjets;
+
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+        Double ratio= (double) compteurIsole / (double) nbObjets;
+        return new Pair<>(ratio,nombreMoyenDeObjetsVoisins);
+
+    }
+
 
 
 }

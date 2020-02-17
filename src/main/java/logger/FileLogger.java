@@ -1,6 +1,5 @@
 package logger;
 
-import com.sun.istack.internal.NotNull;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -12,7 +11,6 @@ public class FileLogger {
     static final int LENGTH_TO_SEND=100;
     static final String CRLF="\r\n";
     static final String TAB="\t";
-    @NotNull
     private String filePath;
     private StringBuilder stringBuilder=new StringBuilder();
     private Writer fstream;
