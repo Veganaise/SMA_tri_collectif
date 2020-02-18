@@ -70,11 +70,9 @@ public class Grille {
 
     public void print(){
         StringBuilder objetsString=new StringBuilder();
-        StringBuilder agentString=new StringBuilder();
 
         //TODO: gestion des agents
         objetsString.append("Objets:\n");
-        agentString.append("Agents: \n");
         for(int x=0;x<m;++x){
             for(int y=0;y<n;++y){
                 ObjetATrier elmt = cases[x][y].objetSurCase;
@@ -99,6 +97,22 @@ public class Grille {
         System.out.println(objetsString.toString());
 
         System.out.println();
+    }
+
+    public String ToStringOnlyObjects(){
+        StringBuilder objetsString=new StringBuilder();
+        for(int x=0;x<m;++x){
+            for(int y=0;y<n;++y){
+                ObjetATrier elmt = cases[x][y].objetSurCase;
+                if (elmt == null) {
+                    objetsString.append(".");
+                } else {
+                    objetsString.append(elmt.getRepresentation());
+                }
+            }
+            objetsString.append("\n");
+        }
+        return objetsString.toString();
     }
 
     // stats

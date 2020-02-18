@@ -52,6 +52,12 @@ public class Systeme {
         env.print();
     }
 
+    public void printGrille(){
+        System.out.println("état grille:");
+        String etatGrille = env.printGrille();
+        System.out.println(etatGrille);
+    }
+
     /**
      * une itération = chaque agent fait une action (perception + mouvement + prise/depose)
      */
