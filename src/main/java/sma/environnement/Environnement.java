@@ -68,6 +68,7 @@ public class Environnement {
     }
 
     private String[] directionsStrings={"","","",""};
+    public boolean verbose=false;
     public void deplacement(Agent agent, int distanceDeDeplacement, Integer direction) {
         Case currentCase=positionDesAgents.get(agent.id);
         Integer x_objectif=currentCase.x;
@@ -94,9 +95,9 @@ public class Environnement {
             caseObjectif.agentSurCase=agent;
             positionDesAgents.put(agent.id,caseObjectif);
 
-            System.out.println("agent "+agent.id+" se déplace en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
+            if(verbose)System.out.println("agent "+agent.id+" se déplace en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
         }else{
-            System.out.println("agent "+agent.id+" a essayé de se déplacer en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
+            if (verbose)System.out.println("agent "+agent.id+" a essayé de se déplacer en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
         }
 
     }
@@ -114,5 +115,9 @@ public class Environnement {
 
     public Pair<Double, Double> mesurerTri() {
         return grille.mesureDeQualiteDuTri();
+    }
+
+    public String printGrille() {
+        return grille.ToStringOnlyObjects();
     }
 }
