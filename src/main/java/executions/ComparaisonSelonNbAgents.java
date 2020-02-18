@@ -22,12 +22,12 @@ public class ComparaisonSelonNbAgents {
     // nombre de test pris pour faire une moyenne
     private final int NB_MEAN=3;
 
-    int tailleGrille=6;
-    int nbObjetA=10;
-    int nbObjetB=10;
+    int tailleGrille=50;
+    int nbObjetA=200;
+    int nbObjetB=200;
     int nbIterations=1000;
 
-    int nbAgents=16;
+    int nbAgents=128;
 
     public ComparaisonSelonNbAgents(String filePath) {
         batchLogger =new BatchLogger(filePath);
@@ -42,7 +42,7 @@ public class ComparaisonSelonNbAgents {
 
         long startTime,endTime,duration;
 
-        for(int nbAgents=1;nbAgents<=32;nbAgents*=2){
+        for(int nbAgents=1;nbAgents<=256;nbAgents*=2){
 
             Systeme systeme=new Systeme(nbAgents,nbObjetA,nbObjetB,tailleGrille,tailleGrille);
             line=new ArrayList<>();

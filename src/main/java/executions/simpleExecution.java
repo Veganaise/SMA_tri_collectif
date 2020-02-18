@@ -22,12 +22,12 @@ public class simpleExecution {
     // nombre de test pris pour faire une moyenne
     private final int NB_MEAN=3;
 
-    int tailleGrille=12;
-    int nbObjetA=12*3;
-    int nbObjetB=12*3;
+    int tailleGrille=50;
+    int nbObjetA=200;
+    int nbObjetB=200;
     int nbIterations=1000;
 
-    int nbAgents=12*2;
+    int nbAgents=30*2;
 
     public simpleExecution(String filePath) {
         batchLogger =new BatchLogger(filePath);
