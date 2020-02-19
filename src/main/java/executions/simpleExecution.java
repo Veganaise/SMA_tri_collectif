@@ -28,7 +28,7 @@ public class simpleExecution {
     int nbObjetB=00;
     int nbIterations=100000;
 
-    int nbAgents=64;
+    int nbAgents=20*60;
 
     public simpleExecution(String filePath) {
         batchLogger =new BatchLogger(filePath);
@@ -43,25 +43,36 @@ public class simpleExecution {
 
 
         Systeme systeme=new Systeme(nbAgents,nbObjetA,nbObjetB,m,n);
+        System.out.println("état initial");
+        systeme.printGrille();
+        line=new ArrayList<>();
+        line.add(String.valueOf(0));
+        log_mesure_tri(line, systeme);
 
-        for(int iteration =0;iteration<=nbIterations;++iteration){
+        for(int iteration =1;iteration<=nbIterations;++iteration){
             systeme.faireUneIteration();
             if(iteration%1000==0){
                 System.out.println("iteration:" + iteration);
-                line=new ArrayList<>();
-                line.add(String.valueOf(iteration));
-                Pair<Double, Double> qualiteTri = systeme.mesurerTri();
-                Double nombreMoyenDeVoisins=qualiteTri.getValue();
-                line.add(String.valueOf(nombreMoyenDeVoisins));
-                Double ratioObjetsIsole = qualiteTri.getKey();
-                line.add(String.valueOf(ratioObjetsIsole));
-                batchLogger.writeLine(line);
                 systeme.printGrille();
 
-                System.out.println("nb moyen de voisin de même type:"+String.format( "%.2f", nombreMoyenDeVoisins ));
-                System.out.println("ratio d'objets isolés:"+String.format( "%.2f", ratioObjetsIsole ));
-                System.out.println("***************************");
+                line=new ArrayList<>();
+                line.add(String.valueOf(iteration));
+                log_mesure_tri(line, systeme);
             }
         }
+    }
+
+    private void log_mesure_tri(ArrayList<String> line, Systeme systeme) {
+        Pair<Double, Double> qualiteTri = systeme.mesurerTri();
+        Double nombreMoyenDeVoisins=qualiteTri.getValue();
+        line.add(String.valueOf(nombreMoyenDeVoisins));
+        Double ratioObjetsIsole = qualiteTri.getKey();
+        line.add(String.valueOf(ratioObjetsIsole));
+        batchLogger.writeLine(line);
+
+
+        System.out.println("nb moyen de voisin de même type:"+String.format( "%.2f", nombreMoyenDeVoisins ));
+        System.out.println("ratio d'objets isolés:"+String.format( "%.2f", ratioObjetsIsole ));
+        System.out.println("***************************");
     }
 }
