@@ -44,7 +44,7 @@ public class Perception {
         return (compteurType+compteurNonType*e)/memoire.t;
     }
 
-    private static final double DEFAULT_ERROR = 0.05;
+    private static final double DEFAULT_ERROR = 0;
     public double getProportionDeObjetPrise(int type, Memoire memoire){
         return getProportionDeObjetPrise(type,memoire,DEFAULT_ERROR);
     }
