@@ -1,5 +1,6 @@
 package sma.environnement;
 
+import javafx.util.Pair;
 import sma.ObjetATrier;
 import sma.Perception;
 import sma.agents.Agent;
@@ -25,7 +26,6 @@ public class Environnement {
     public void initializePositionOfElements(List<Agent> agents, int nA, int nB) {
         ArrayList<Case> casesDisponibles=grille.getCases();
         Random random=new Random();
-        //TODO: changez gestion casesVoisinage disponibles
         for(Agent agent:agents){
             Case rdmCase=casesDisponibles.get(random.nextInt(casesDisponibles.size()));
             rdmCase.agentSurCase =agent;
@@ -33,6 +33,7 @@ public class Environnement {
             casesDisponibles.remove(rdmCase);
         }
 
+        casesDisponibles=grille.getCases();
         for(int i=0;i<nA;++i){
             Case rdmCase=casesDisponibles.get(random.nextInt(casesDisponibles.size()));
             rdmCase.objetSurCase =new ObjetATrier('A');
@@ -67,6 +68,7 @@ public class Environnement {
     }
 
     private String[] directionsStrings={"","","",""};
+    public boolean verbose=false;
     public void deplacement(Agent agent, int distanceDeDeplacement, Integer direction) {
         Case currentCase=positionDesAgents.get(agent.id);
         Integer x_objectif=currentCase.x;
@@ -93,9 +95,9 @@ public class Environnement {
             caseObjectif.agentSurCase=agent;
             positionDesAgents.put(agent.id,caseObjectif);
 
-            System.out.println("agent "+agent.id+" se déplace en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
+            if(verbose)System.out.println("agent "+agent.id+" se déplace en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
         }else{
-            System.out.println("agent "+agent.id+" a essayé de se déplacer en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
+            if (verbose)System.out.println("agent "+agent.id+" a essayé de se déplacer en ligne "+caseObjectif.x.toString()+" et en colonne "+caseObjectif.y.toString());
         }
 
     }
@@ -109,5 +111,13 @@ public class Environnement {
 
     public void priseObjet(Case caseActuelle) {
         caseActuelle.objetSurCase=null;
+    }
+
+    public Pair<Double, Double> mesurerTri() {
+        return grille.mesureDeQualiteDuTri();
+    }
+
+    public String printGrille() {
+        return grille.ToStringOnlyObjects();
     }
 }

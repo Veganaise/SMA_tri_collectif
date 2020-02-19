@@ -37,6 +37,8 @@ public class Agent extends ElementPhysique {
         env.percevoir(this);
     }
 
+
+    public boolean verbose=false;
     private void action() {
 
         perception();
@@ -53,7 +55,7 @@ public class Agent extends ElementPhysique {
 
         // mise à jour mémoire
         memoire.miseAjour(caseActuelle);
-        System.out.println(memoire.toString());
+        if(verbose)System.out.println(memoire.toString());
 
         // dépot d'objet
         if(percep.porteUnObjet() && !caseActuelle.isOccupiedByObject()){
@@ -61,7 +63,7 @@ public class Agent extends ElementPhysique {
             double f = percep.getProportionDeObjetDepot(objetSurAgent.getType());
             double proba=(f/(k_depose+f))*(f/(k_depose+f));
             if(rdm.nextDouble()<proba){
-                System.out.println("agent "+id+" dépose objet "+objetSurAgent.getRepresentation());
+                if(verbose)System.out.println("agent "+id+" dépose objet "+objetSurAgent.getRepresentation());
                 percep.objetSurAgent=null;
                 env.deposeObjet(caseActuelle,objetSurAgent);
             }
@@ -71,7 +73,7 @@ public class Agent extends ElementPhysique {
             double f=percep.getProportionDeObjetPrise(objetSurCase.getType(), memoire);
             double proba=(k_prise/((k_prise+f)))*(k_prise/(k_prise+f));
             if(rdm.nextDouble()<proba){
-                System.out.println("agent "+id+" prend objet "+objetSurCase.getRepresentation());
+                if(verbose) System.out.println("agent "+id+" prend objet "+objetSurCase.getRepresentation());
                 percep.objetSurAgent=objetSurCase;
                 env.priseObjet(caseActuelle);
             }

@@ -1,5 +1,6 @@
 package sma;
 
+import javafx.util.Pair;
 import sma.agents.Agent;
 import sma.environnement.Environnement;
 
@@ -49,5 +50,29 @@ public class Systeme {
 
     public void print(){
         env.print();
+    }
+
+    public void printGrille(){
+        System.out.println("état grille:");
+        String etatGrille = env.printGrille();
+        System.out.println(etatGrille);
+    }
+
+    /**
+     * une itération = chaque agent fait une action (perception + mouvement + prise/depose)
+     */
+    public void faireUneIteration() {
+        for(Agent agent: agents){
+            agent.iteration();
+        }
+    }
+
+    /**
+     * mesure la qualité du tri avec le nombre d'objets isolés et le nombre moyen d'objets de même type dans le voisinage
+     * des objets
+     * @return < ration nombre objet isolé sur nombre total d'objet, nombre moyen d'objets de même type dans le voisinage>
+     */
+    public Pair<Double,Double> mesurerTri() {
+        return env.mesurerTri();
     }
 }
