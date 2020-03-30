@@ -8,7 +8,7 @@ import sma.agents.Agent;
 import java.util.*;
 
 public class Environnement {
-    private Grille grille;
+    public Grille grille;
     private HashMap<Integer, Case> positionDesAgents; // key: id of agent ; value: case (position) of agent
 
     public Environnement(int m, int n) {

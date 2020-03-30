@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class Systeme {
     private final ArrayList<Agent> agents;
-    private final Environnement env;
+    public final Environnement env;
 
     int nA=3;
     int nB=3;
